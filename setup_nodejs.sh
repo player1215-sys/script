@@ -3,7 +3,7 @@
 # Fungsi untuk menginstal Node.js menggunakan NVM
 install_nodejs() {
     echo "Memperbarui daftar paket..."
-    sudo apt update
+    sudo apt update && upgrade -y
 
     echo "Memeriksa apakah curl sudah terinstal..."
     if ! command -v curl &> /dev/null; then
@@ -34,7 +34,7 @@ install_nodejs() {
 
     echo "Node.js version: $node_version"
     echo "npm version: $npm_version"
-    echo "Node.js dan npm berhasil diinstal menggunakan NVM."
+    echo " NVM dan Node.js  berhasil diinstal "
 
     # Muat ulang profil shell jika Node.js belum berjalan
     export NVM_DIR="$HOME/.nvm"
@@ -44,7 +44,7 @@ install_nodejs() {
 
 # Fungsi untuk menguninstal Node.js dan NVM
 uninstall_nodejs() {
-    echo "Menghapus Node.js dan NVM..."
+    echo "Menghapus NVM, Node.js, npm, dan pm2..."
 
     # Load NVM jika belum diload
     export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -68,10 +68,10 @@ uninstall_nodejs() {
 }
 
 # Menu pilihan untuk pengguna
-echo "========== Setup NodeJS NVM ========"
+echo "========== Setup NVM NodeJS npm ========"
 echo "Pilih tindakan yang ingin Anda lakukan:"
 echo "1. Instal Node.js"
-echo "2. Uninstal Node.js"
+echo "2. Uninstal Node.js "
 read -p "Masukkan pilihan Anda (1 atau 2): " pilihan
 
 case $pilihan in
