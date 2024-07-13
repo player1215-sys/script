@@ -7,8 +7,8 @@ configure_mongodb_remote_access() {
     # Backup file konfigurasi MongoDB
     # sudo cp /etc/mongod.conf /etc/mongod.conf.backup
 
-    # Ubah bindIp di file konfigurasi
-    sudo sed -i 's/bindIp: .*/bindIp: 127.0.0.1,146.190.99.146/' /etc/mongod.conf
+    # Ubah bindIp di file konfigurasi ubah (0.0.0.0) dengan ip host/server
+    sudo sed -i 's/bindIp: .*/bindIp: 127.0.0.1,0.0.0.0/' /etc/mongod.conf
 
     # Restart MongoDB untuk menerapkan perubahan
     sudo systemctl restart mongod
@@ -17,8 +17,7 @@ configure_mongodb_remote_access() {
     sudo ufw reload
     # konvirmasi
     echo "MongoDB telah dikonfigurasi untuk akses jarak jauh."
-    # Menguji koneksi jarak jauh mongodb
-    # mongosh --host 146.190.99.146 --port 27017
+    # mongosh --host <ip host> --port 27017
 
 }
 
@@ -48,7 +47,7 @@ EOF
 
 # Fungsi untuk masuk ke terminal MongoDB
 connect_to_mongodb() {
-    HOST="146.190.99.146"
+    HOST="0.0.0.0" # masukkan ip host / server
     PORT="27017"
    #USER="remote_user"  # Ganti dengan nama pengguna MongoDB Anda
    #PASSWORD="secure_password"  # Ganti dengan password MongoDB Anda
